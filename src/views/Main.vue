@@ -1,43 +1,78 @@
 <template>
-    <h2>Timer: minutes: {{ minutesToDisplay != null ? minutesToDisplay : '25'}} 
-    seconds: {{ displaySeconds() }}
+    <h2>Timer: minutes: {{ displaySeconds('minutes')}} 
+    seconds: {{ displaySeconds('seconds') }}
     </h2>
+    <button @click="handleCountdown()">{{ isTimeRunning ? 'Stop' : 'Start' }}</button>
+    <button @click="resetCountdown()">Reset</button>
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 
-const timeLeft = ref(1500000) //time in ms (25min)
-const seconds = ref(timeLeft.value/1000);
-const minutes = ref(seconds.value/60);
-const secondsToDisplay = ref(0);
-const minutesToDisplay = ref(25);
-// console.log('minutes:'+minutes.value,'seconds:'+seconds.value);
-// console.log(119%60);
-// console.log(Math.floor(119/60));
+let nIntervId;
+const defaultTime = {
+  milliseconds: 1500000, //time in ms (25min)
+  get seconds() {
+    return this.milliseconds/1000;
+  },
+  get minutes() {
+    return this.seconds/60;
+  }
+}
+
+const seconds = ref(defaultTime.seconds);
+const secondsToDisplay = ref(defaultTime.seconds);
+const minutesToDisplay = ref(defaultTime.minutes);
+const isTimeRunning = ref(false);
+
+const formatTime = () => {
+  secondsToDisplay.value = seconds.value%60;
+  minutesToDisplay.value = Math.floor(seconds.value/60);
+}
+
 const getTime = (time) => {
-  setInterval(() => {
+  nIntervId = setInterval(() => {
     seconds.value -= 1;
     if(secondsToDisplay.value < 10) {
-      secondsToDisplay.value 
+      secondsToDisplay.value;
     }
-    secondsToDisplay.value = seconds.value%60;
-    minutesToDisplay.value = Math.floor(seconds.value/60);
-    // console.log(seconds.value);
+    formatTime()
   }, 1000)
 }
 
-const displaySeconds = () => {
-  if(secondsToDisplay.value != null) {
-    if(secondsToDisplay.value < 10) {
-      return `0${secondsToDisplay.value}`
-    }
-    return secondsToDisplay.value
-  } else if(secondsToDisplay.value === null) {
-    return '00';
+const displaySeconds = (unitOfTime) => {
+  let time = 0;
+
+  if(unitOfTime === 'seconds') {
+    time = secondsToDisplay.value;
+  } else if(unitOfTime === 'minutes') {
+    time = minutesToDisplay.value;
+  }
+
+  if(time < 10) {
+    return `0${time}`;
+  }
+  return time;
+}
+
+const handleCountdown = () => {
+  isTimeRunning.value = !isTimeRunning.value;
+  if(isTimeRunning.value) {
+    getTime();
+  } else if(!isTimeRunning.value) {
+    clearInterval(nIntervId);
   }
 }
-getTime();
+
+const resetCountdown = () => {
+  isTimeRunning.value = false;
+  clearInterval(nIntervId);
+  nIntervId = null;
+  seconds.value = defaultTime.seconds;
+  formatTime();
+}
+
+onMounted(formatTime);
 </script>
 
 <style lang="scss" scoped>
