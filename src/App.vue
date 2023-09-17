@@ -1,10 +1,10 @@
-<script setup>
-
-</script>
-
 <template>
-<p>test</p>
+  <MainView />
 </template>
+
+<script setup>
+import MainView from '@/views/Main.vue';
+</script>
 
 <style>
 body {
