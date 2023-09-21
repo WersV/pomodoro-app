@@ -1,7 +1,9 @@
 <template>
-  <h2>Timer: minutes: {{ displayTime('minutes') }}
+  {{ 'dodaj tutaj zakładki short break i long break' }}
+  <!-- <h2>Timer: minutes: {{ displayTime('minutes') }}
     seconds: {{ displayTime('seconds') }}
-  </h2>
+  </h2> -->
+  <AppTimer :minutes="displayTime('minutes')" :seconds="displayTime('seconds')"/>
   <AppControls 
     @handle-countdown="handleCountdown()" 
     @reset-countdown="resetCountdown()"
@@ -29,6 +31,7 @@ import { onMounted, ref } from 'vue';
 import AppControls from '@/components/AppControls.vue';
 import AppModal from '@/components/AppModal.vue';
 import AppInput from '../components/AppInput.vue';
+import AppTimer from '../components/AppTimer.vue';
 
 let nIntervId;
 const defaultTime = {
