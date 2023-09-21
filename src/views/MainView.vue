@@ -14,7 +14,7 @@
   >
     <template #options>
       <div>
-        <h2 class="modal-h2">Focus time:</h2>
+        <h2 class="modal-h2">Focus time</h2>
         <AppInput v-model="inputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
         <AppInput v-model="inputShortBreak" id="ShortBreak" label="Short break: " type="number"/>
         <AppInput v-model="inputLongBreak" id="LongBreak" label="Long break: " type="number"/>

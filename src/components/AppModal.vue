@@ -43,7 +43,7 @@ const emit = defineEmits(['handleConfiguration']);
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 270px;
-		height: 200px;
+		height: 220px;
 		color: white;
 		background-color: black;
 

@@ -5,10 +5,9 @@
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-      :placeholder="label"
       :id="id"
     >
-    <span>minutes</span>
+    <span class="minutes">minutes</span>
     <p
       v-if="error"
       class="errorMessage">
@@ -45,6 +44,25 @@ defineEmits(['update:modelValue'])
   }
   input {
     width: 50px;
+  }
+}
+.input-wrapper {
+  margin: 10px 0;
+  label {
+    display: inline-block;
+    width: 90px;
+  }
+  input {
+    width: 30px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+  }
+
+  .minutes {
+    padding-left: 5px;
   }
 }
 </style>
