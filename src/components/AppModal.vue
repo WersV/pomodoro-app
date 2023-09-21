@@ -9,7 +9,7 @@
 				<slot name="options"></slot>
 			</main>
 		</div>
-		<button class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
+		<button @click="$emit('changeTime')" class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
 	</div>
 </div>
 </template>
@@ -25,7 +25,7 @@ onClickOutside(target, () => {
 	emit('handleConfiguration')
 });
 
-const emit = defineEmits(['handleConfiguration']);
+const emit = defineEmits(['handleConfiguration','changeTime']);
 
 </script>
 

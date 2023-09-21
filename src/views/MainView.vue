@@ -1,6 +1,6 @@
 <template>
-  <h2>Timer: minutes: {{ displaySeconds('minutes') }}
-    seconds: {{ displaySeconds('seconds') }}
+  <h2>Timer: minutes: {{ displayTime('minutes') }}
+    seconds: {{ displayTime('seconds') }}
   </h2>
   <AppControls 
     @handle-countdown="handleCountdown()" 
@@ -11,6 +11,7 @@
   <AppModal 
     v-if="isModalDisplayed"
     @handle-configuration="handleConfiguration()"
+    @change-time="changeTime()"
   >
     <template #options>
       <div>
@@ -46,7 +47,7 @@ const minutesToDisplay = ref(defaultTime.minutes);
 const isTimeRunning = ref(false);
 const isModalDisplayed = ref(false);
 
-const inputMinutes = ref(null);
+const inputMinutes = ref();
 const inputShortBreak = ref(null);
 const inputLongBreak = ref(null);
 
@@ -65,7 +66,7 @@ const getTime = () => {
   }, 1000)
 }
 
-const displaySeconds = (unitOfTime) => {
+const displayTime = (unitOfTime) => {
   let time = 0;
 
   if (unitOfTime === 'seconds') {
@@ -101,9 +102,19 @@ const handleConfiguration = () => {
   isModalDisplayed.value = !isModalDisplayed.value;
 }
 
-// const changeTime = (event) => {
-//   console.log(event);
-// }
+const changeTime = () => {
+  const minutes = Number(inputMinutes.value);
+  const shortBreak = Number(inputShortBreak.value);
+  const longBreak = Number(inputLongBreak.value);
+  if(minutes === 0 || shortBreak === 0 || longBreak === 0) {
+    return alert('Values cannot be 0')
+  }
+  isTimeRunning.value = false;
+  clearInterval(nIntervId);
+  defaultTime.milliseconds = minutes*60*1000;
+  seconds.value = defaultTime.seconds;
+  formatTime();
+}
 
 onMounted(formatTime);
 </script>
