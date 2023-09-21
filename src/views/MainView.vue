@@ -14,7 +14,10 @@
   >
     <template #options>
       <div>
-        <AppInput type="number"/>
+        <h2 class="modal-h2">Focus time:</h2>
+        <AppInput v-model="inputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
+        <AppInput v-model="inputShortBreak" id="ShortBreak" label="Short break: " type="number"/>
+        <AppInput v-model="inputLongBreak" id="LongBreak" label="Long break: " type="number"/>
       </div>
     </template>
   </AppModal>
@@ -43,12 +46,16 @@ const minutesToDisplay = ref(defaultTime.minutes);
 const isTimeRunning = ref(false);
 const isModalDisplayed = ref(false);
 
+const inputMinutes = ref(null);
+const inputShortBreak = ref(null);
+const inputLongBreak = ref(null);
+
 const formatTime = () => {
   secondsToDisplay.value = seconds.value % 60;
   minutesToDisplay.value = Math.floor(seconds.value / 60);
 }
 
-const getTime = (time) => {
+const getTime = () => {
   nIntervId = setInterval(() => {
     seconds.value -= 1;
     if (secondsToDisplay.value < 10) {
@@ -94,11 +101,18 @@ const handleConfiguration = () => {
   isModalDisplayed.value = !isModalDisplayed.value;
 }
 
+// const changeTime = (event) => {
+//   console.log(event);
+// }
+
 onMounted(formatTime);
 </script>
 
 <style lang="scss" scoped>
 h2 {
   color: white;
+}
+.modal-h2 {
+  text-align: center;
 }
 </style>

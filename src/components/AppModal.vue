@@ -1,12 +1,15 @@
 <template>
 <div class="modal-background">
 	<div ref="target" class="modal">
-		<button @click="$emit('handleConfiguration')">x</button>
+		<button @click="$emit('handleConfiguration')" class="close-btn">
+			<font-awesome-icon icon="fa-solid fa-xmark" />
+		</button>
 		<div class="content-wrapper">
 			<main class="options">
 				<slot name="options"></slot>
 			</main>
 		</div>
+		<button class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
 	</div>
 </div>
 </template>
@@ -39,9 +42,39 @@ const emit = defineEmits(['handleConfiguration']);
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 100px;
-		height: 100px;
-		background-color: brown;
+		width: 270px;
+		height: 200px;
+		color: white;
+		background-color: black;
+
+		.content-wrapper {
+			.options {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+
+		.save-btn {
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			font-size: 30px;
+			color: white;
+			border: 0;
+			background-color: transparent;
+		}
+
+		.close-btn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background-color: transparent;
+			border: 0;
+			color: white;
+			font-size: 30px;
+			cursor: pointer;
+		}
 	}
 }
 </style>
