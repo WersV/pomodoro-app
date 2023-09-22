@@ -1,8 +1,5 @@
 <template>
-  {{ 'dodaj tutaj zakładki short break i long break' }}
-  <!-- <h2>Timer: minutes: {{ displayTime('minutes') }}
-    seconds: {{ displayTime('seconds') }}
-  </h2> -->
+  <AppPomodoroControls />
   <AppTimer :minutes="displayTime('minutes')" :seconds="displayTime('seconds')"/>
   <AppControls 
     @handle-countdown="handleCountdown()" 
@@ -32,25 +29,31 @@ import AppControls from '@/components/AppControls.vue';
 import AppModal from '@/components/AppModal.vue';
 import AppInput from '../components/AppInput.vue';
 import AppTimer from '../components/AppTimer.vue';
+import AppPomodoroControls from '../components/AppPomodoroControls.vue';
 
 let nIntervId;
 const defaultTime = {
-  milliseconds: 1500000, //time in ms (25min)
-  get seconds() {
-    return this.milliseconds / 1000;
+  pomodoroSeconds: 1500, //default 25min on start
+  get pomodoroMinutes() {
+    return this.pomodoroSeconds / 60;
   },
-  get minutes() {
-    return this.seconds / 60;
+  shortBreakSeconds: 300, //default 5min on start
+  get shortBreakMinutes() {
+    return this.shortBreakSeconds / 60;
+  },
+  longBreakSeconds: 1800, //default 30min on start
+  get longBreakMinutes() {
+    return this.longBreakSeconds / 60;
   }
 }
 
-const seconds = ref(defaultTime.seconds);
-const secondsToDisplay = ref(defaultTime.seconds);
-const minutesToDisplay = ref(defaultTime.minutes);
+const seconds = ref(defaultTime.pomodoroSeconds);
+const secondsToDisplay = ref(defaultTime.pomodoroSeconds);
+const minutesToDisplay = ref(defaultTime.pomodoroMinutes);
 const isTimeRunning = ref(false);
 const isModalDisplayed = ref(false);
 
-const inputMinutes = ref();
+const inputMinutes = ref(null);
 const inputShortBreak = ref(null);
 const inputLongBreak = ref(null);
 
@@ -97,7 +100,7 @@ const resetCountdown = () => {
   isTimeRunning.value = false;
   clearInterval(nIntervId);
   nIntervId = null;
-  seconds.value = defaultTime.seconds;
+  seconds.value = defaultTime.pomodoroSeconds;
   formatTime();
 }
 
@@ -112,11 +115,27 @@ const changeTime = () => {
   if(minutes === 0 || shortBreak === 0 || longBreak === 0) {
     return alert('Values cannot be 0')
   }
+
   isTimeRunning.value = false;
   clearInterval(nIntervId);
-  defaultTime.milliseconds = minutes*60*1000;
-  seconds.value = defaultTime.seconds;
-  formatTime();
+  defaultTime.pomodoroSeconds = minutes*60;
+  defaultTime.shortBreakSeconds = shortBreak*60;
+  defaultTime.longBreakSeconds = longBreak*60;
+  setTime('pomodoro') // assume that after save-btn click(AppModal.vue)
+  // pages redirects automatically to pomodoro timer so time is given to pomodoro timer not any break timer.
+}
+
+const setTime = (timeType) => {
+  if(timeType === 'pomodoro') {
+    seconds.value = defaultTime.pomodoroSeconds;
+    formatTime();
+  } else if(timeType === 'shortBreak') {
+    seconds.value = defaultTime.shortBreakSeconds;
+    formatTime();
+  } else if(timeType === 'longBreak') {
+    seconds.value = defaultTime.longBreakSeconds;
+    formatTime();
+  }
 }
 
 onMounted(formatTime);
