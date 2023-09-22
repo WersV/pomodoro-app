@@ -3,14 +3,14 @@
   <AppTimer :minutes="displayTime('minutes')" :seconds="displayTime('seconds')"/>
   <AppControls 
     @handle-countdown="handleCountdown()" 
-    @reset-countdown="resetCountdown()"
+    @set-time="setTime()"
     @handle-configuration="handleConfiguration()"
     :flag="isTimeRunning" 
   />
   <AppModal 
     v-if="isModalDisplayed"
     @handle-configuration="handleConfiguration()"
-    @change-time="changeTime()"
+    @save-time="saveTime()"
   >
     <template #options>
       <div>
@@ -27,9 +27,9 @@
 import { onMounted, ref } from 'vue';
 import AppControls from '@/components/AppControls.vue';
 import AppModal from '@/components/AppModal.vue';
-import AppInput from '../components/AppInput.vue';
-import AppTimer from '../components/AppTimer.vue';
-import AppPomodoroControls from '../components/AppPomodoroControls.vue';
+import AppInput from '@/components/AppInput.vue';
+import AppTimer from '@/components/AppTimer.vue';
+import AppPomodoroControls from '@/components/AppPomodoroControls.vue';
 
 let nIntervId;
 const defaultTime = {
@@ -56,6 +56,8 @@ const isModalDisplayed = ref(false);
 const inputMinutes = ref(null);
 const inputShortBreak = ref(null);
 const inputLongBreak = ref(null);
+
+const activeTab = ref('pomodoro');
 
 const formatTime = () => {
   secondsToDisplay.value = seconds.value % 60;
@@ -96,24 +98,30 @@ const handleCountdown = () => {
   }
 }
 
-const resetCountdown = () => {
-  isTimeRunning.value = false;
-  clearInterval(nIntervId);
-  nIntervId = null;
-  seconds.value = defaultTime.pomodoroSeconds;
-  formatTime();
-}
+// const resetCountdown = () => {
+//   isTimeRunning.value = false;
+//   clearInterval(nIntervId);
+//   nIntervId = null;
+//   if(activeTab.value === 'pomodoro') {
+//     seconds.value = defaultTime.pomodoroSeconds;
+//   } else if(activeTab.value === 'shortBreak') {
+//     seconds.value = defaultTime.shortBreakSeconds;
+//   } else if(activeTab.value === 'longBreak') {
+//     seconds.value = defaultTime.longBreakSeconds;
+//   }
+//   formatTime();
+// }
 
 const handleConfiguration = () => {
   isModalDisplayed.value = !isModalDisplayed.value;
 }
 
-const changeTime = () => {
+const saveTime = () => {
   const minutes = Number(inputMinutes.value);
   const shortBreak = Number(inputShortBreak.value);
   const longBreak = Number(inputLongBreak.value);
   if(minutes === 0 || shortBreak === 0 || longBreak === 0) {
-    return alert('Values cannot be 0')
+    return alert('Values cannot be 0') 
   }
 
   isTimeRunning.value = false;
@@ -121,21 +129,22 @@ const changeTime = () => {
   defaultTime.pomodoroSeconds = minutes*60;
   defaultTime.shortBreakSeconds = shortBreak*60;
   defaultTime.longBreakSeconds = longBreak*60;
-  setTime('pomodoro') // assume that after save-btn click(AppModal.vue)
+  setTime(activeTab.value) // assume that after save-btn click(AppModal.vue)
   // pages redirects automatically to pomodoro timer so time is given to pomodoro timer not any break timer.
 }
 
-const setTime = (timeType) => {
-  if(timeType === 'pomodoro') {
+const setTime = () => {
+  isTimeRunning.value = false;
+  clearInterval(nIntervId);
+  nIntervId = null;
+  if(activeTab.value === 'pomodoro') {
     seconds.value = defaultTime.pomodoroSeconds;
-    formatTime();
-  } else if(timeType === 'shortBreak') {
+  } else if(activeTab.value === 'shortBreak') {
     seconds.value = defaultTime.shortBreakSeconds;
-    formatTime();
-  } else if(timeType === 'longBreak') {
+  } else if(activeTab.value === 'longBreak') {
     seconds.value = defaultTime.longBreakSeconds;
-    formatTime();
   }
+  formatTime();
 }
 
 onMounted(formatTime);

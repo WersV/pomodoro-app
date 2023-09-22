@@ -1,6 +1,6 @@
 <template>
   <button @click="$emit('handleCountdown')">{{ flag ? 'Stop' : 'Start' }}</button>
-  <button @click="$emit('resetCountdown')">Reset</button>
+  <button @click="$emit('setTime')">Reset</button>
   <button @click="$emit('handleConfiguration')">Config</button>
 </template>
 
@@ -13,7 +13,7 @@ defineProps({
   }
 })
 
-defineEmits(['handleCountdown', 'resetCountdown', 'handleConfiguration'])
+defineEmits(['handleCountdown', 'setTime', 'handleConfiguration'])
 </script>
 
 <style lang="scss" scoped></style>
