@@ -1,8 +1,8 @@
 <template>
   <div class="pomodoro-controls-container">
-    <button @click="$emit('setTime', 'pomodoro')">Pomodoro</button>
-    <button @click="$emit('setTime', 'shortBreak')">Short Break</button>
-    <button @click="$emit('setTime', 'longBreak')">Long Break</button>
+    <button >Pomodoro</button>
+    <button >Short Break</button>
+    <button >Long Break</button>
   </div>
 </template>
 
