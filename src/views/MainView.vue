@@ -1,5 +1,5 @@
 <template>
-  <AppPomodoroControls />
+  <AppPomodoroControls @change-time-type="changeTimeType"/>
   <AppTimer :minutes="displayTime('minutes')" :seconds="displayTime('seconds')"/>
   <AppControls 
     @handle-countdown="handleCountdown()" 
@@ -145,6 +145,11 @@ const setTime = () => {
     seconds.value = defaultTime.longBreakSeconds;
   }
   formatTime();
+}
+
+const changeTimeType = (timeType) => {
+  activeTab.value = timeType;
+  setTime();
 }
 
 onMounted(formatTime);
