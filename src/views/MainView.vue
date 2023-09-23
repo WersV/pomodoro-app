@@ -1,11 +1,9 @@
 <template>
   <AppPomodoroControls/>
   <AppTimer/>
-  <AppControls @handle-config="handleConfig()"/>
+  <AppControls />
   <AppModal 
-    v-if="isModalDisplayed"
-    @switch-modal="switchModal()"
-    @save-modal-changes="saveModalChanges()"
+    v-if="storeModal.isModalDisplayed"
   >
     <template #options>
       <div>
@@ -19,30 +17,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import AppControls from '@/components/AppControls.vue';
 import AppModal from '@/components/AppModal.vue';
 import AppInput from '@/components/AppInput.vue';
 import AppTimer from '@/components/AppTimer.vue';
 import AppPomodoroControls from '@/components/AppPomodoroControls.vue';
-import {useTimeStore} from '@/stores/store.js';
+import {useModalStore} from '@/stores/store.js';
 
-const store = useTimeStore();
+const storeModal = useModalStore();
 
 const inputPomodoroMinutes = ref('')
 const inputShortBreakMinutes = ref('')
 const inputLongBreakMinutes = ref('')
-
-const isModalDisplayed = ref(false);
-
-const switchModal = () => {
-  isModalDisplayed.value = !isModalDisplayed.value;
-  console.log('dziala');
-}
-
-const handleConfig = () => {
-  isModalDisplayed.value = !isModalDisplayed.value;
-}
 
 </script>
 

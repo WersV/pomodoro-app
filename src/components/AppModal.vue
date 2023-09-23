@@ -1,7 +1,7 @@
 <template>
 <div class="modal-background">
 	<div ref="target" class="modal">
-		<button @click="$emit('switchModal')" class="close-btn">
+		<button @click="storeModal.switchModal()" class="close-btn">
 			<font-awesome-icon icon="fa-solid fa-xmark" />
 		</button>
 		<div class="content-wrapper">
@@ -9,23 +9,23 @@
 				<slot name="options"></slot>
 			</main>
 		</div>
-		<button class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
+		<button @click="storeModal.saveModalChanges()" class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
 	</div>
 </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { onClickOutside } from '@vueuse/core';
+import { onClickOutside } from '@vueuse/core'
+import {useModalStore} from '@/stores/store.js'
 
-const target = ref(null);
+const storeModal = useModalStore()
 
+const target = ref(null)
 
 onClickOutside(target, () => {
-	emit('switchModal')
+	storeModal.switchModal()
 });
-
-const emit = defineEmits(['switchModal']);
 
 </script>
 

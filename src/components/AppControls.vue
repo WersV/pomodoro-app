@@ -2,10 +2,13 @@
   <!-- <button >{{ flag ? 'Stop' : 'Start' }}</button> -->
   <button >Start</button>
   <button >Reset</button>
-  <button @click="$emit('handleConfig')">Config</button>
+  <button @click="storeModal.switchModal()">Config</button>
 </template>
 
 <script setup>
+import {useModalStore} from '@/stores/store.js'
+
+const storeModal = useModalStore()
 
 // defineProps({
 //   flag: {
@@ -14,7 +17,6 @@
 //   }
 // })
 
-defineEmits(['handleConfig'])
 
 </script>
 
