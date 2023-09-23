@@ -2,7 +2,7 @@
   <!-- <button >{{ flag ? 'Stop' : 'Start' }}</button> -->
   <button >Start</button>
   <button >Reset</button>
-  <button >Config</button>
+  <button @click="$emit('handleConfig')">Config</button>
 </template>
 
 <script setup>
@@ -13,6 +13,8 @@
 //     default: false
 //   }
 // })
+
+defineEmits(['handleConfig'])
 
 </script>
 

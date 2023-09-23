@@ -1,10 +1,11 @@
 <template>
   <AppPomodoroControls/>
   <AppTimer/>
-  <AppControls />
+  <AppControls @handle-config="handleConfig()"/>
   <AppModal 
     v-if="isModalDisplayed"
-    @handle-configuration="handleConfiguration()"
+    @switch-modal="switchModal()"
+    @save-modal-changes="saveModalChanges()"
   >
     <template #options>
       <div>
@@ -34,10 +35,15 @@ const inputLongBreakMinutes = ref('')
 
 const isModalDisplayed = ref(false);
 
-const handleConfiguration = () => {
+const switchModal = () => {
   isModalDisplayed.value = !isModalDisplayed.value;
   console.log('dziala');
 }
+
+const handleConfig = () => {
+  isModalDisplayed.value = !isModalDisplayed.value;
+}
+
 </script>
 
 <style lang="scss" scoped>

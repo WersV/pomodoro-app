@@ -1,7 +1,7 @@
 <template>
 <div class="modal-background">
 	<div ref="target" class="modal">
-		<button @click="$emit('handleConfiguration')" class="close-btn">
+		<button @click="$emit('switchModal')" class="close-btn">
 			<font-awesome-icon icon="fa-solid fa-xmark" />
 		</button>
 		<div class="content-wrapper">
@@ -22,10 +22,10 @@ const target = ref(null);
 
 
 onClickOutside(target, () => {
-	emit('handleConfiguration')
+	emit('switchModal')
 });
 
-const emit = defineEmits(['handleConfiguration']);
+const emit = defineEmits(['switchModal']);
 
 </script>
 

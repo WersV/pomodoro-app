@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-defineEmits(['setTime'])
+
 </script>
 
 <style lang="scss" scoped>
