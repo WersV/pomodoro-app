@@ -9,7 +9,7 @@
 				<slot name="options"></slot>
 			</main>
 		</div>
-		<button @click="$emit('saveChanges')" class="save-btn">
+		<button @click="storeModal.saveModalChanges()" class="save-btn">
 			<font-awesome-icon icon="fa-solid fa-check" />
 		</button>
 		<button @click="storeTime.$reset()" class="reset-default-btn">Reset default</button>
@@ -31,8 +31,6 @@ const target = ref(null)
 onClickOutside(target, () => {
 	storeModal.switchModal()
 });
-
-defineEmits(['saveChanges'])
 </script>
 
 <style lang="scss" scoped>

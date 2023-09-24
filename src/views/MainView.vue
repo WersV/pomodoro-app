@@ -4,14 +4,13 @@
   <AppControls />
   <AppModal 
     v-if="storeModal.isModalDisplayed"
-    @save-changes="saveChanges()"
   >
     <template #options>
       <div>
         <h2 class="modal-h2">Focus time</h2>
-        <AppInput v-model="inputPomodoroMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
-        <AppInput v-model="inputShortBreakMinutes" id="ShortBreak" label="Short break: " type="number"/>
-        <AppInput v-model="inputLongBreakMinutes" id="LongBreak" label="Long break: " type="number"/>
+        <AppInput v-model="storeTime.pomodoroInputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
+        <AppInput v-model="storeTime.shortBreakInputMinutes" id="ShortBreak" label="Short break: " type="number"/>
+        <AppInput v-model="storeTime.longBreakInputMinutes" id="LongBreak" label="Long break: " type="number"/>
       </div>
     </template>
   </AppModal>
@@ -30,17 +29,6 @@ import {useTimeStore} from '@/stores/time.js'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
-
-const inputPomodoroMinutes = ref('')
-const inputShortBreakMinutes = ref('')
-const inputLongBreakMinutes = ref('')
-
-const saveChanges = () => {
-  storeModal.saveModalChanges()
-  storeTime.pomodoroInputMinutes = Number(inputPomodoroMinutes.value)
-  storeTime.shortBreakInputMinutes = Number(inputShortBreakMinutes.value)
-  storeTime.longBreakInputMinutes = Number(inputLongBreakMinutes.value)
-}
 
 </script>
 
