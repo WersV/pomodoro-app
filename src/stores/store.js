@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import {ref} from 'vue'
 
 export const useModalStore = defineStore('modal', () => {
+
   const isModalDisplayed = ref(false)
 
   function switchModal() {
@@ -11,7 +12,6 @@ export const useModalStore = defineStore('modal', () => {
 
   function saveModalChanges() {
     isModalDisplayed.value = !isModalDisplayed.value;
-    console.log('dziala');
   }
 
   return { isModalDisplayed, switchModal, saveModalChanges }

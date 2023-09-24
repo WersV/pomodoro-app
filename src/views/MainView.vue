@@ -4,6 +4,7 @@
   <AppControls />
   <AppModal 
     v-if="storeModal.isModalDisplayed"
+    @save-changes="saveChanges()"
   >
     <template #options>
       <div>
@@ -14,23 +15,32 @@
       </div>
     </template>
   </AppModal>
-  {{ inputPomodoroMinutes }}
+  {{ storeTime.pomodoroInput }}
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import AppControls from '@/components/AppControls.vue';
-import AppModal from '@/components/AppModal.vue';
-import AppInput from '@/components/AppInput.vue';
-import AppTimer from '@/components/AppTimer.vue';
-import AppPomodoroControls from '@/components/AppPomodoroControls.vue';
-import {useModalStore} from '@/stores/store.js';
+import { ref } from 'vue'
+import AppControls from '@/components/AppControls.vue'
+import AppModal from '@/components/AppModal.vue'
+import AppInput from '@/components/AppInput.vue'
+import AppTimer from '@/components/AppTimer.vue'
+import AppPomodoroControls from '@/components/AppPomodoroControls.vue'
+import {useModalStore} from '@/stores/store.js'
+import {useTimeStore} from '@/stores/time.js'
 
-const storeModal = useModalStore();
+const storeModal = useModalStore()
+const storeTime = useTimeStore()
 
 const inputPomodoroMinutes = ref('')
 const inputShortBreakMinutes = ref('')
 const inputLongBreakMinutes = ref('')
+
+const saveChanges = () => {
+  storeModal.saveModalChanges()
+  storeTime.pomodoroInputMinutes = Number(inputPomodoroMinutes.value)
+  storeTime.shortBreakInputMinutes = Number(inputShortBreakMinutes.value)
+  storeTime.longBreakInputMinutes = Number(inputLongBreakMinutes.value)
+}
 
 </script>
 

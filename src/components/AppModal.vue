@@ -9,7 +9,7 @@
 				<slot name="options"></slot>
 			</main>
 		</div>
-		<button @click="storeModal.saveModalChanges()" class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
+		<button @click="$emit('saveChanges')" class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
 	</div>
 </div>
 </template>
@@ -27,6 +27,7 @@ onClickOutside(target, () => {
 	storeModal.switchModal()
 });
 
+defineEmits(['saveChanges'])
 </script>
 
 <style lang="scss" scoped>
