@@ -14,6 +14,7 @@
       </div>
     </template>
   </AppModal>
+  {{ inputPomodoroMinutes }}
 </template>
 
 <script setup>

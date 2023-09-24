@@ -7,10 +7,10 @@ export const useModalStore = defineStore('modal', () => {
 
   function switchModal() {
     isModalDisplayed.value = !isModalDisplayed.value;
-    console.log('dziala')
   }
 
   function saveModalChanges() {
+    isModalDisplayed.value = !isModalDisplayed.value;
     console.log('dziala');
   }
 
