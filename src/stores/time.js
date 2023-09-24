@@ -16,5 +16,5 @@ export const useTimeStore = defineStore('time', () => {
   }
 
 
-  return { pomodoroInputMinutes, shortBreakInputMinutes, longBreakInputMinutes, addInputValuesToStore }
+  return { pomodoroInputMinutes, shortBreakInputMinutes, longBreakInputMinutes, addInputValuesToStore, $reset }
 })

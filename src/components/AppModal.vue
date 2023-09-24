@@ -9,7 +9,10 @@
 				<slot name="options"></slot>
 			</main>
 		</div>
-		<button @click="$emit('saveChanges')" class="save-btn"><font-awesome-icon icon="fa-solid fa-check" /></button>
+		<button @click="$emit('saveChanges')" class="save-btn">
+			<font-awesome-icon icon="fa-solid fa-check" />
+		</button>
+		<button @click="storeTime.$reset()" class="reset-default-btn">Reset default</button>
 	</div>
 </div>
 </template>
@@ -18,8 +21,10 @@
 import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import {useModalStore} from '@/stores/store.js'
+import {useTimeStore} from '@/stores/time.js'
 
 const storeModal = useModalStore()
+const storeTime = useTimeStore()
 
 const target = ref(null)
 
@@ -44,7 +49,7 @@ defineEmits(['saveChanges'])
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 270px;
-		height: 220px;
+		height: 240px;
 		color: white;
 		background-color: black;
 
@@ -64,6 +69,7 @@ defineEmits(['saveChanges'])
 			color: white;
 			border: 0;
 			background-color: transparent;
+			cursor: pointer;
 		}
 
 		.close-btn {
@@ -74,6 +80,17 @@ defineEmits(['saveChanges'])
 			border: 0;
 			color: white;
 			font-size: 30px;
+			cursor: pointer;
+		}
+		.reset-default-btn {
+			position: absolute;
+			bottom: 16px;
+			right: 60px;
+			background-color: transparent;
+			border: 1px solid white;
+			border-radius: 10px;
+			color: white;
+			padding: 5px 10px;
 			cursor: pointer;
 		}
 	}
