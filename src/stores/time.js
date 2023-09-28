@@ -42,7 +42,7 @@ export const useTimeStore = defineStore('time', () => {
         // console.log(seconds);
         seconds.value -= 1
         console.log(seconds.value);
-      },1000)
+      }, 1000)
     } else if(isTimeRunning.value) {
       clearInterval(intervalId)
       intervalId = null
@@ -69,22 +69,6 @@ export const useTimeStore = defineStore('time', () => {
     seconds.value = null
   }
 
-  // function displayFormatedTime(timeUnit) {
-  //   // let time;
-  //   let seconds = pomodoroInputMinutes*60
-  //   if(timeUnit === 'seconds') {
-  //     return seconds%60
-  //   } else if(timeUnit === 'minutes') {
-  //     return seconds/60
-  //   }
-  //   return null
-  // }
-
-  // onMounted(() => {
-  //   seconds.value
-  // })
-
-
   return { 
     pomodoroInputMinutes,
     shortBreakInputMinutes,
@@ -92,7 +76,6 @@ export const useTimeStore = defineStore('time', () => {
     isTimeRunning,
     seconds,
     $reset,
-    handleCounter,
-    // displayFormatedTime
+    handleCounter
   }
 })
