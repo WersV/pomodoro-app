@@ -35,14 +35,24 @@ export const useTimeStore = defineStore('time', () => {
       handleCounterHelper(longBreakSeconds.value)
     }
     if(!isTimeRunning.value) {
-      intervalId = setInterval(() => {
-        seconds.value -= 1
-      }, 1000)
+      handleRunningTime()
     } else if(isTimeRunning.value) {
       clearInterval(intervalId)
       intervalId = null
     }
     isTimeRunning.value = !isTimeRunning.value
+
+    function handleRunningTime() {
+      intervalId = setInterval(() => {
+        if(seconds.value < 1) {
+          clearInterval(intervalId)
+          intervalId = null
+          alert('Time has passed')
+        } else {
+          seconds.value -= 1
+        }
+      }, 1000)
+    }
   }
 
   function activeTabSwitch(tabType) {
