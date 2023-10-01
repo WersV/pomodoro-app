@@ -70,9 +70,6 @@ export const useTimeStore = defineStore('time', () => {
   function handleCounterHelper(defaultSeconds) {
     if(seconds.value === null) {
       return seconds.value = defaultSeconds // if it's first run give default seconds value
-    } else {
-      // defaultSeconds = seconds.value; // if it's second and every next countdown run use 
-      // remaining seconds from first run
     }
   }
 
@@ -84,6 +81,21 @@ export const useTimeStore = defineStore('time', () => {
     // and then to display proper time in the app
   }
 
+  function resetCounter() {
+    seconds.value = null // null value bcs handleCounterHelper() will be able to reset particular timer value to default
+    if(activeTab.value === 'pomodoro') {
+      handleCounterHelper(pomodoroSeconds.value)
+    } else if(activeTab.value === 'shortBreak') {
+      handleCounterHelper(shortBreakSeconds.value)
+    } else if(activeTab.value === 'longBreak') {
+      handleCounterHelper(longBreakSeconds.value)
+    }
+
+    clearInterval(intervalId)
+    intervalId = null
+    isTimeRunning.value = false
+  }
+
   return { 
     pomodoroInputMinutes,
     shortBreakInputMinutes,
@@ -93,6 +105,7 @@ export const useTimeStore = defineStore('time', () => {
     $reset,
     handleCounter,
     activeTabSwitch,
-    changeTimeOnModalSave
+    changeTimeOnModalSave,
+    resetCounter
   }
 })
