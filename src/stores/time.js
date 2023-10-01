@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import {ref, onMounted} from 'vue'
+import {ref} from 'vue'
 import { useStorage } from '@vueuse/core'
-import {useModalStore} from '@/stores/store.js'
 
 export const useTimeStore = defineStore('time', () => {
   const pomodoroInputMinutes = useStorage('pomodoroInputMinutes', 25)
@@ -12,36 +11,32 @@ export const useTimeStore = defineStore('time', () => {
   const activeTab = ref('pomodoro')
   const seconds = ref(pomodoroInputMinutes.value*60)
 
-  let pomodoroSeconds = Number(pomodoroInputMinutes.value*60)
-  let shortBreakSeconds = Number(shortBreakInputMinutes.value*60)
-  let longBreakSeconds = Number(longBreakInputMinutes.value*60)
+  const pomodoroSeconds = ref(pomodoroInputMinutes.value*60)
+  const shortBreakSeconds = ref(shortBreakInputMinutes.value*60)
+  const longBreakSeconds = ref(longBreakInputMinutes.value*60)
   let intervalId
 
   function $reset() {
     pomodoroInputMinutes.value = 25
     shortBreakInputMinutes.value = 5
     longBreakInputMinutes.value = 20
+    pomodoroSeconds.value = pomodoroInputMinutes.value*60
+    shortBreakSeconds.value = shortBreakInputMinutes.value*60
+    longBreakSeconds.value = longBreakInputMinutes.value*60
+    activeTabSwitch('pomodoro')
   }
 
   function handleCounter() {
     if(activeTab.value === 'pomodoro') {
-      // if(seconds === null) {
-      //   seconds = pomodoroSeconds // if it's first run give default value of pomodoroSeconds
-      // } else {
-      //   pomodoroSeconds = seconds; // if it's second and every next countdown run use ramining seconds from first run
-      // }
-      handleCounterHelper(pomodoroSeconds)
+      handleCounterHelper(pomodoroSeconds.value)
     } else if(activeTab.value === 'shortBreak') {
-      // if()
-      seconds.value = shortBreakSeconds
+      handleCounterHelper(shortBreakSeconds.value)
     } else if(activeTab.value === 'longBreak') {
-      seconds.value = longBreakSeconds
+      handleCounterHelper(longBreakSeconds.value)
     }
     if(!isTimeRunning.value) {
       intervalId = setInterval(() => {
-        // console.log(seconds);
         seconds.value -= 1
-        console.log(seconds.value);
       }, 1000)
     } else if(isTimeRunning.value) {
       clearInterval(intervalId)
@@ -50,23 +45,43 @@ export const useTimeStore = defineStore('time', () => {
     isTimeRunning.value = !isTimeRunning.value
   }
 
+  function activeTabSwitch(tabType) {
+    let defaultTime
+    if(tabType === 'pomodoro') {
+      activeTab.value = 'pomodoro'
+      defaultTime = pomodoroSeconds.value
+    } else if(tabType === 'shortBreak') {
+      activeTab.value = 'shortBreak'
+      defaultTime = shortBreakSeconds.value
+    } else if(tabType === 'longBreak') {
+      activeTab.value = 'longBreak'
+      defaultTime = longBreakSeconds.value
+    }
+    console.log(pomodoroSeconds.value);
+    seconds.value = null
+    handleCounterHelper(defaultTime) // after tab change get new seconds value to display in the app.
+    // seconds will always be null here so handleCounterHelper() will always return default time of current tab
+    
+    clearInterval(intervalId) // stop countdown when tab switching
+    intervalId = null
+    isTimeRunning.value = false
+  }
+
   function handleCounterHelper(defaultSeconds) {
     if(seconds.value === null) {
       return seconds.value = defaultSeconds // if it's first run give default seconds value
     } else {
-      defaultSeconds = seconds.value; // if it's second and every next countdown run use remaining seconds from first run
+      // defaultSeconds = seconds.value; // if it's second and every next countdown run use 
+      // remaining seconds from first run
     }
   }
 
-  function activeTabSwitch(tabType) {
-    if(tabType === 'pomodoro') {
-      activeTab.value = 'pomodoro'
-    } else if(tabType === 'shortBreak') {
-      activeTab.value = 'shortBreak'
-    } else if(tabType === 'longBreak') {
-      activeTab.value = 'longBreak'
-    }
-    seconds.value = null
+  function changeTimeOnModalSave() {
+    pomodoroSeconds.value = pomodoroInputMinutes.value*60
+    shortBreakSeconds.value = shortBreakInputMinutes.value*60
+    longBreakSeconds.value = longBreakInputMinutes.value*60
+    activeTabSwitch('pomodoro') // invoke this function to set proper time to seconds.value
+    // and then to display proper time in the app
   }
 
   return { 
@@ -76,6 +91,8 @@ export const useTimeStore = defineStore('time', () => {
     isTimeRunning,
     seconds,
     $reset,
-    handleCounter
+    handleCounter,
+    activeTabSwitch,
+    changeTimeOnModalSave
   }
 })

@@ -1,5 +1,4 @@
 <template>
-  <!-- <button >{{ flag ? 'Stop' : 'Start' }}</button> -->
   <button @click="storeTime.handleCounter()">{{ storeTime.isTimeRunning ? 'Stop' : 'Start' }}</button>
   <button >Reset</button>
   <button @click="storeModal.switchModal()">Config</button>
@@ -11,14 +10,6 @@ import {useTimeStore} from '@/stores/time.js'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
-
-// defineProps({
-//   flag: {
-//     type: Boolean,
-//     default: false
-//   }
-// })
-
 
 </script>
 

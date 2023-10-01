@@ -1,12 +1,16 @@
 <template>
   <div class="pomodoro-controls-container">
-    <button >Pomodoro</button>
-    <button >Short Break</button>
-    <button >Long Break</button>
+    <button @click="storeTime.activeTabSwitch('pomodoro')">Pomodoro</button>
+    <button @click="storeTime.activeTabSwitch('shortBreak')">Short Break</button>
+    <button @click="storeTime.activeTabSwitch('longBreak')">Long Break</button>
   </div>
 </template>
 
 <script setup>
+import {useTimeStore} from '@/stores/time.js'
+
+const storeTime = useTimeStore()
+
 
 </script>
 
