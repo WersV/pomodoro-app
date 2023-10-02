@@ -113,17 +113,19 @@ export const useTimeStore = defineStore('time', () => {
   }
 
   function calculateTimeFraction() {
+    let rawTimeFraction
     if(activeTab.value === 'pomodoro') {
-      return seconds.value / pomodoroSeconds.value
+      rawTimeFraction = seconds.value / pomodoroSeconds.value
     } else if(activeTab.value === 'shortBreak') {
-      return seconds.value / shortBreakSeconds.value
+      rawTimeFraction = seconds.value / shortBreakSeconds.value
     } else if(activeTab.value === 'longBreak') {
-      return seconds.value / longBreakSeconds.value
+      rawTimeFraction = seconds.value / longBreakSeconds.value
     }
+    return rawTimeFraction
   }
 
   function setCircleDasharray() {
-    const circleDasharray = Math.round(calculateTimeFraction() * FULL_DASH_ARRAY) + ' 283'
+    const circleDasharray = (calculateTimeFraction() * FULL_DASH_ARRAY) + ' 283'
     return circleDasharray
   }
 

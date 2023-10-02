@@ -72,7 +72,7 @@ console.log(storeTime.seconds);
       transform-origin: center;
 
       /* One second aligns with the speed of the countdown timer */
-      transition: 1s linear all;
+      transition: 1s all;
 
       stroke: green;
     }
