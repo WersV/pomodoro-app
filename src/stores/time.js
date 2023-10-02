@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 import { useStorage } from '@vueuse/core'
 
 export const useTimeStore = defineStore('time', () => {
@@ -14,7 +14,11 @@ export const useTimeStore = defineStore('time', () => {
   const pomodoroSeconds = ref(pomodoroInputMinutes.value*60)
   const shortBreakSeconds = ref(shortBreakInputMinutes.value*60)
   const longBreakSeconds = ref(longBreakInputMinutes.value*60)
-  let intervalId
+  const intervalId = ref(null)
+  const isStartStopBtnDisabled = ref(false)
+
+
+  const FULL_DASH_ARRAY = 283 // because 2*pi*r = 2*pi*45(my actual radius) = 283
 
   function $reset() {
     pomodoroInputMinutes.value = 25
@@ -37,25 +41,28 @@ export const useTimeStore = defineStore('time', () => {
     if(!isTimeRunning.value) {
       handleRunningTime()
     } else if(isTimeRunning.value) {
-      clearInterval(intervalId)
-      intervalId = null
+      clearInterval(intervalId.value)
+      intervalId.value = null
     }
     isTimeRunning.value = !isTimeRunning.value
 
     function handleRunningTime() {
-      intervalId = setInterval(() => {
+      intervalId.value = setInterval(() => {
         if(seconds.value < 1) {
-          clearInterval(intervalId)
-          intervalId = null
+          clearInterval(intervalId.value)
+          intervalId.value = null
+          isStartStopBtnDisabled.value = true
           alert('Time has passed')
         } else {
           seconds.value -= 1
+          isStartStopBtnDisabled.value = false
         }
       }, 1000)
     }
   }
 
   function activeTabSwitch(tabType) {
+    setCircleDasharray()
     let defaultTime
     if(tabType === 'pomodoro') {
       activeTab.value = 'pomodoro'
@@ -67,13 +74,12 @@ export const useTimeStore = defineStore('time', () => {
       activeTab.value = 'longBreak'
       defaultTime = longBreakSeconds.value
     }
-    console.log(pomodoroSeconds.value);
     seconds.value = null
     handleCounterHelper(defaultTime) // after tab change get new seconds value to display in the app.
     // seconds will always be null here so handleCounterHelper() will always return default time of current tab
     
-    clearInterval(intervalId) // stop countdown when tab switching
-    intervalId = null
+    clearInterval(intervalId.value) // stop countdown when tab switching
+    intervalId.value = null
     isTimeRunning.value = false
   }
 
@@ -101,9 +107,24 @@ export const useTimeStore = defineStore('time', () => {
       handleCounterHelper(longBreakSeconds.value)
     }
 
-    clearInterval(intervalId)
-    intervalId = null
+    clearInterval(intervalId.value)
+    intervalId.value = null
     isTimeRunning.value = false
+  }
+
+  function calculateTimeFraction() {
+    if(activeTab.value === 'pomodoro') {
+      return seconds.value / pomodoroSeconds.value
+    } else if(activeTab.value === 'shortBreak') {
+      return seconds.value / shortBreakSeconds.value
+    } else if(activeTab.value === 'longBreak') {
+      return seconds.value / longBreakSeconds.value
+    }
+  }
+
+  function setCircleDasharray() {
+    const circleDasharray = Math.round(calculateTimeFraction() * FULL_DASH_ARRAY) + ' 283'
+    return circleDasharray
   }
 
   return { 
@@ -112,10 +133,12 @@ export const useTimeStore = defineStore('time', () => {
     longBreakInputMinutes,
     isTimeRunning,
     seconds,
+    isStartStopBtnDisabled,
     $reset,
     handleCounter,
     activeTabSwitch,
     changeTimeOnModalSave,
-    resetCounter
+    resetCounter,
+    setCircleDasharray
   }
 })
