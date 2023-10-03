@@ -33,7 +33,6 @@ function setActiveClass(timeType) {
     color: white;
     padding: 10px 15px;
     margin-left: 10px;
-    // text-transform: uppercase;
     font-size: 12px;
     cursor: pointer;
   }
