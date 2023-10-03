@@ -45,4 +45,14 @@ function setActiveClass(timeType) {
     color: black;
   }
 }
+
+@media(min-width: 1200px) {
+.pomodoro-controls-container {
+  button {
+    margin-left: 20px;
+    font-size: 20px;
+    padding: 12px 35px;
+  }
+}
+}
 </style>
