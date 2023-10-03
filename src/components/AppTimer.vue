@@ -47,8 +47,6 @@ const displayTime = (timeType) => {
   }
 }
 
-console.log(storeTime.seconds);
-
 </script>
 
 <style lang="scss" scoped>

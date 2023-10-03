@@ -136,6 +136,7 @@ export const useTimeStore = defineStore('time', () => {
     isTimeRunning,
     seconds,
     isStartStopBtnDisabled,
+    activeTab,
     $reset,
     handleCounter,
     activeTabSwitch,
