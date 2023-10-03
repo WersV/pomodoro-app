@@ -62,11 +62,11 @@ console.log(storeTime.seconds);
       fill: none;
       stroke: none;
     .timer-path-elapsed {
-      stroke-width: 7px;
-      stroke: grey;
+      stroke-width: 0;
+      stroke: white;
     }
     .base-timer-path-remaining {
-      stroke-width: 7px;
+      stroke-width: 5px;
       /* Makes sure the animation starts at the top of the circle */
       transform: rotate(90deg);
       transform-origin: center;
@@ -74,7 +74,7 @@ console.log(storeTime.seconds);
       /* One second aligns with the speed of the countdown timer */
       transition: 1s all;
 
-      stroke: green;
+      stroke: white;
     }
     }
   }
@@ -84,6 +84,7 @@ console.log(storeTime.seconds);
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 50px;
+    color: white;
   }
 }
 

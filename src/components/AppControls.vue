@@ -1,7 +1,9 @@
 <template>
-  <button @click="storeTime.handleCounter()" :disabled="storeTime.isStartStopBtnDisabled">{{ storeTime.isTimeRunning ? 'Stop' : 'Start' }}</button>
-  <button @click="storeTime.resetCounter()">Reset</button>
-  <button @click="storeModal.switchModal()">Config</button>
+  <div class="control-btns">
+    <button @click="storeTime.handleCounter()" :disabled="storeTime.isStartStopBtnDisabled">{{ storeTime.isTimeRunning ? 'Stop' : 'Start' }}</button>
+    <button @click="storeTime.resetCounter()">Reset</button>
+    <button @click="storeModal.switchModal()">Config</button>
+  </div>
 </template>
 
 <script setup>
@@ -22,4 +24,6 @@ watchEffect(() => {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
