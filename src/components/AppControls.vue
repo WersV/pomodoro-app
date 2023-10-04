@@ -1,8 +1,17 @@
 <template>
   <div class="control-btns">
-    <button class="time-btn" :class="{clicked: storeTime.isStartStopBtnStyling}" @click="storeTime.handleCounter(); toggleClassClicked()" :disabled="storeTime.isStartStopBtnDisabled">{{ storeTime.isTimeRunning ? 'Stop' : 'Start' }}</button>
-    <button class="btns reset" @click="storeTime.resetCounter()"><font-awesome-icon icon="fa-solid fa-arrow-rotate-right" /></button>
-    <button class="btns" @click="storeModal.switchModal()"><font-awesome-icon icon="fa-solid fa-gear" /></button>
+    <button class="time-btn" :class="{clicked: storeTime.isStartStopBtnStyling}" 
+      @click="storeTime.handleCounter(); toggleClassClicked()" 
+      :disabled="storeTime.isStartStopBtnDisabled">
+      {{ storeTime.isTimeRunning ? 'Stop' : 'Start' }}
+    </button>
+    <button class="btns reset" 
+      @click="storeTime.resetCounter(); startAnimation('reset')">
+      <font-awesome-icon :class="{animated: isResetAnimating}" icon="fa-solid fa-arrow-rotate-right" />
+    </button>
+    <button class="btns" @click="storeModal.switchModal(); startAnimation('settings')">
+      <font-awesome-icon :class="{animated: isSettingsAnimating}" icon="fa-solid fa-gear" />
+    </button>
   </div>
 </template>
 
@@ -14,6 +23,8 @@ import {useTimeStore} from '@/stores/time.js'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
+const isResetAnimating = ref(false)
+const isSettingsAnimating = ref(false)
 
 watchEffect(() => {
   if(storeTime.seconds < 1) {
@@ -25,6 +36,19 @@ watchEffect(() => {
 
 const toggleClassClicked = () => {
   storeTime.isStartStopBtnStyling = !storeTime.isStartStopBtnStyling
+}
+
+const startAnimation = (btnType) => {
+  if(btnType === 'reset') {
+    isResetAnimating.value = true
+  } else if (btnType === 'settings') {
+    isSettingsAnimating.value = true
+  }
+
+  setTimeout(() => {
+    isResetAnimating.value = false
+    isSettingsAnimating.value = false
+  }, 700)
 }
 
 </script>
@@ -70,6 +94,9 @@ const toggleClassClicked = () => {
   .btns.reset {
     font-size: 34px; 
   }
+  .animated {
+    animation: rotation .7s linear; // when changing duration remember to update duration of setTimeout()
+  }
 }
 
 @media(min-width: 575px) {
@@ -103,5 +130,14 @@ const toggleClassClicked = () => {
     font-size: 43px;
   }
 }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(360deg)
+  }
 }
 </style>
