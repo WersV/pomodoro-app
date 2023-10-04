@@ -60,8 +60,8 @@ const displayTime = (timeType) => {
       fill: none;
       stroke: none;
     // .timer-path-elapsed {
-    //   stroke-width: 1px;
-    //   stroke: white;
+    //   stroke-width: 5px;
+    //   stroke: green;
     // }
     .base-timer-path-remaining {
       stroke-width: 5px;
@@ -84,6 +84,14 @@ const displayTime = (timeType) => {
     font-size: 50px;
     color: white;
   }
+}
+
+@media(min-width: 575px) {
+.timer {
+  .timer-display {
+    font-size: 60px;
+  }
+}
 }
 
 @media(min-width: 1200px) {

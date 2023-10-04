@@ -28,12 +28,13 @@ function setActiveClass(timeType) {
   min-width: 300px;
   button {
     background-color: transparent;
-    border-radius: 20px;
+    border-radius: 30px;
     border: 1px solid white;
     color: white;
     padding: 10px 15px;
     margin-left: 10px;
     font-size: 12px;
+    font-family: lato;
     cursor: pointer;
   }
   button:first-child {
@@ -45,13 +46,21 @@ function setActiveClass(timeType) {
   }
 }
 
-@media(min-width: 1200px) {
-.pomodoro-controls-container {
-  button {
-    margin-left: 20px;
-    font-size: 20px;
-    padding: 12px 35px;
+@media(min-width: 575px) {
+  .pomodoro-controls-container {
+    button {
+      font-size: 17px;
+    }
   }
 }
+
+@media(min-width: 1200px) {
+  .pomodoro-controls-container {
+    button {
+      margin-left: 20px;
+      font-size: 20px;
+      padding: 12px 35px;
+    }
+  }
 }
 </style>
