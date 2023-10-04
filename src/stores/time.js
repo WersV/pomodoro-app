@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref, computed} from 'vue'
+import {ref} from 'vue'
 import { useStorage } from '@vueuse/core'
 
 export const useTimeStore = defineStore('time', () => {
@@ -16,6 +16,7 @@ export const useTimeStore = defineStore('time', () => {
   const longBreakSeconds = ref(longBreakInputMinutes.value*60)
   const intervalId = ref(null)
   const isStartStopBtnDisabled = ref(false)
+  const isStartStopBtnStyling = ref(true)
 
 
   const FULL_DASH_ARRAY = 283 // because 2*pi*r = 2*pi*45(my actual radius) = 283
@@ -62,6 +63,7 @@ export const useTimeStore = defineStore('time', () => {
   }
 
   function activeTabSwitch(tabType) {
+    isStartStopBtnStyling.value = true
     setCircleDasharray()
     let defaultTime
     if(tabType === 'pomodoro') {
@@ -136,6 +138,8 @@ export const useTimeStore = defineStore('time', () => {
     isTimeRunning,
     seconds,
     isStartStopBtnDisabled,
+    activeTab,
+    isStartStopBtnStyling,
     $reset,
     handleCounter,
     activeTabSwitch,

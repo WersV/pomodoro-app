@@ -6,7 +6,7 @@
 <div class="timer">
   <svg class="timer-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g class="timer-circle">
-      <circle class="timer-path-elapsed" cx="50" cy="50" r="45" />
+      <!-- <circle class="timer-path-elapsed" cx="50" cy="50" r="45" /> -->
       <path
         id="base-timer-path-remaining"
         :stroke-dasharray="storeTime.setCircleDasharray()"
@@ -47,8 +47,6 @@ const displayTime = (timeType) => {
   }
 }
 
-console.log(storeTime.seconds);
-
 </script>
 
 <style lang="scss" scoped>
@@ -61,10 +59,10 @@ console.log(storeTime.seconds);
     .timer-circle {
       fill: none;
       stroke: none;
-    .timer-path-elapsed {
-      stroke-width: 0;
-      stroke: white;
-    }
+    // .timer-path-elapsed {
+    //   stroke-width: 5px;
+    //   stroke: green;
+    // }
     .base-timer-path-remaining {
       stroke-width: 5px;
       /* Makes sure the animation starts at the top of the circle */
@@ -86,6 +84,22 @@ console.log(storeTime.seconds);
     font-size: 50px;
     color: white;
   }
+}
+
+@media(min-width: 575px) {
+.timer {
+  .timer-display {
+    font-size: 60px;
+  }
+}
+}
+
+@media(min-width: 1200px) {
+.timer {
+  .timer-display {
+    font-size: 75px;
+  }
+}
 }
 
 </style>
