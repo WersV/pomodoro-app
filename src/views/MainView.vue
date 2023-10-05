@@ -1,20 +1,22 @@
 <template>
-  <div class="main-container">
+<div class="main-container">
   <AppPomodoroControls/>
   <AppTimer/>
   <AppControls />
-  <AppModal 
-    v-if="storeModal.isModalDisplayed"
-  >
-    <template #options>
-      <div>
-        <h2 class="modal-h2">Focus time</h2>
-        <AppInput v-model="storeTime.pomodoroInputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
-        <AppInput v-model="storeTime.shortBreakInputMinutes" id="ShortBreak" label="Short break: " type="number"/>
-        <AppInput v-model="storeTime.longBreakInputMinutes" id="LongBreak" label="Long break: " type="number"/>
-      </div>
-    </template>
-  </AppModal>
+  <Transition>
+    <AppModal 
+      v-if="storeModal.isModalDisplayed"
+    >
+      <template #options>
+        <div>
+          <h2 class="modal-h2">Focus time</h2>
+          <AppInput v-model="storeTime.pomodoroInputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
+          <AppInput v-model="storeTime.shortBreakInputMinutes" id="ShortBreak" label="Short break: " type="number"/>
+          <AppInput v-model="storeTime.longBreakInputMinutes" id="LongBreak" label="Long break: " type="number"/>
+        </div>
+      </template>
+    </AppModal>
+  </Transition>
   {{ storeTime.pomodoroInput }}
 </div>
 </template>
@@ -35,10 +37,6 @@ const storeTime = useTimeStore()
 
 <style lang="scss" scoped>
 .main-container {
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
   width: 100%;
   height: 100vh;
   display: flex;
@@ -49,4 +47,15 @@ const storeTime = useTimeStore()
     text-align: center;
   }
 }
+
+.v-enter-active, .v-leave-active {
+		transition: all 0.3s ease-out;
+	}
+
+	.v-enter-from,
+	.v-leave-to {
+		transform: scale(1.2);
+		opacity: 0;
+	}
+
 </style>

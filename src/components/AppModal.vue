@@ -1,20 +1,20 @@
 <template>
-<div class="modal-background">
-	<div ref="target" class="modal">
-		<button @click="storeModal.switchModal()" class="close-btn">
-			<font-awesome-icon icon="fa-solid fa-xmark" />
-		</button>
-		<div class="content-wrapper">
-			<main class="options">
-				<slot name="options"></slot>
-			</main>
+	<div class="modal-background">
+		<div v-if="storeModal.isModalDisplayed" ref="target" class="modal">
+			<button @click="storeModal.switchModal()" class="close-btn">
+				<font-awesome-icon icon="fa-solid fa-xmark" />
+			</button>
+			<div class="content-wrapper">
+				<main class="options">
+					<slot name="options"></slot>
+				</main>
+			</div>
+			<button @click="storeModal.saveModalChanges()" class="save-btn">
+				<font-awesome-icon icon="fa-solid fa-check" />
+			</button>
+			<button @click="storeTime.$reset()" class="reset-default-btn">Reset default</button>
 		</div>
-		<button @click="storeModal.saveModalChanges()" class="save-btn">
-			<font-awesome-icon icon="fa-solid fa-check" />
-		</button>
-		<button @click="storeTime.$reset()" class="reset-default-btn">Reset default</button>
 	</div>
-</div>
 </template>
 
 <script setup>
@@ -41,6 +41,7 @@ onClickOutside(target, () => {
 	width: 100vw;
 	height: 100vh;
 	background-color: rgba(0,0,0,0.6);
+	
 	.modal {
 		position: absolute;
 		top: 50%;
@@ -50,6 +51,7 @@ onClickOutside(target, () => {
 		height: 240px;
 		color: white;
 		background-color: black;
+		border-radius: 15px;
 
 		.content-wrapper {
 			.options {
@@ -93,4 +95,5 @@ onClickOutside(target, () => {
 		}
 	}
 }
+
 </style>
