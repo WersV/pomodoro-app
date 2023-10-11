@@ -12,7 +12,7 @@
 		<button @click="storeModal.saveModalChanges()" class="save-btn">
 			<font-awesome-icon icon="fa-solid fa-check" />
 		</button>
-		<button @click="storeTime.$reset()" class="reset-default-btn">Reset default</button>
+		<button @click="storeTime.$reset(); storeModal.$reset()" class="reset-default-btn">Reset default</button>
 	</div>
 </div>
 </template>

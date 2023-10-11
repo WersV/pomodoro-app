@@ -11,6 +11,17 @@ export const useModalStore = defineStore('modal', () => {
 
   const isModalDisplayed = ref(false)
 
+  const bcgThemePaths = [
+   'src/assets/img/bcg1.jpg',
+   'src/assets/img/bcg2.jpg',
+   'src/assets/img/bcg3.jpg',
+   'src/assets/img/bcg4.jpg']
+
+  function $reset() {
+    activeTheme.value = 'theme 1'
+    changeAppTheme() //invoke fun here just to immediately change bcg img when clicking "reset default" btn
+  }
+
   function switchModal() {
     isModalDisplayed.value = !isModalDisplayed.value;
     console.log(activeTheme);
@@ -19,7 +30,30 @@ export const useModalStore = defineStore('modal', () => {
   function saveModalChanges() {
     isModalDisplayed.value = !isModalDisplayed.value;
     storeTime.changeTimeOnModalSave()
+    changeAppTheme()
   }
 
-  return { isModalDisplayed, activeTheme, switchModal, saveModalChanges }
+  function changeAppTheme() {
+    let index
+    switch(activeTheme.value) {
+      case 'theme 1':
+        index = 0
+        break
+      case 'theme 2':
+        index = 1
+        break
+      case 'theme 3':
+        index = 2
+        break
+      case 'theme 4':
+        index = 3
+        break
+      default:
+        return 
+    }
+    document.body.style.backgroundImage=`url(${bcgThemePaths[index]})`
+  }
+  changeAppTheme()
+
+  return { isModalDisplayed, activeTheme, $reset, switchModal, saveModalChanges }
 })
