@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia'
 import {ref} from 'vue'
 import {useTimeStore} from '@/stores/time.js'
+import { useStorage } from '@vueuse/core'
 
 export const useModalStore = defineStore('modal', () => {
+
+  const activeTheme = useStorage('activeTheme', 'theme 2')
 
   const storeTime = useTimeStore()
 
@@ -10,6 +13,7 @@ export const useModalStore = defineStore('modal', () => {
 
   function switchModal() {
     isModalDisplayed.value = !isModalDisplayed.value;
+    console.log(activeTheme);
   }
 
   function saveModalChanges() {
@@ -17,5 +21,5 @@ export const useModalStore = defineStore('modal', () => {
     storeTime.changeTimeOnModalSave()
   }
 
-  return { isModalDisplayed, switchModal, saveModalChanges }
+  return { isModalDisplayed, activeTheme, switchModal, saveModalChanges }
 })

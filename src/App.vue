@@ -8,6 +8,7 @@ import MainView from '@/views/MainView.vue';
 
 <style>
 body {
-  background-color: #333;
+  background-image: url("@/assets/img/bcg2.jpg");
+  background-size: cover;
 }
 </style>
