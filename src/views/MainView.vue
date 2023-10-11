@@ -7,12 +7,12 @@
     <AppModal 
       v-if="storeModal.isModalDisplayed"
     >
-      <template #options>
+      <template #content-main>
         <div>
-          <h2 class="modal-h2">Focus time</h2>
           <AppInput v-model="storeTime.pomodoroInputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
           <AppInput v-model="storeTime.shortBreakInputMinutes" id="ShortBreak" label="Short break: " type="number"/>
           <AppInput v-model="storeTime.longBreakInputMinutes" id="LongBreak" label="Long break: " type="number"/>
+          <AppSelect v-model="storeModal.activeTheme" :options="['theme 1', 'theme 2', 'theme 3', 'theme 4']" label="Background: "/>
         </div>
       </template>
     </AppModal>
@@ -29,6 +29,7 @@ import AppTimer from '@/components/AppTimer.vue'
 import AppPomodoroControls from '@/components/AppPomodoroControls.vue'
 import {useModalStore} from '@/stores/store.js'
 import {useTimeStore} from '@/stores/time.js'
+import AppSelect from '@/components/AppSelect.vue'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
@@ -43,9 +44,6 @@ const storeTime = useTimeStore()
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  .modal-h2 {
-    text-align: center;
-  }
 }
 
 .v-enter-active, .v-leave-active {

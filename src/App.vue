@@ -8,6 +8,6 @@ import MainView from '@/views/MainView.vue';
 
 <style>
 body {
-  background-color: #333;
+  background-size: cover;
 }
 </style>
