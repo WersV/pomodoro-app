@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 import {useTimeStore} from '@/stores/time.js'
 import { useStorage } from '@vueuse/core'
 
@@ -16,7 +16,15 @@ export const useModalStore = defineStore('modal', () => {
    'src/assets/img/bcg2.jpg',
    'src/assets/img/bcg3.jpg',
    'src/assets/img/bcg4.jpg',
-   'src/assets/img/bcg5.jpg']
+   'src/assets/img/bcg5.jpg',
+   'src/assets/img/bcg6.jpg',
+   'src/assets/img/bcg7.jpg',
+   'src/assets/img/bcg8.jpg',
+   'src/assets/gif/gif1.gif',
+   'src/assets/gif/gif2.webp',
+   'src/assets/gif/gif3.gif',
+   'src/assets/gif/gif4.gif',
+   'src/assets/gif/gif5.gif',]
 
   function $reset() {
     activeTheme.value = 'theme 1'
@@ -30,39 +38,21 @@ export const useModalStore = defineStore('modal', () => {
   function saveModalChanges() {
     isModalDisplayed.value = !isModalDisplayed.value;
     storeTime.changeTimeOnModalSave()
-    changeAppTheme()
+    // changeAppTheme()
   }
 
   function changeAppTheme() {
     const themesCount = bcgThemePaths.length
-    console.log(themesCount);
     let index
-
     for(let i = 0; i < themesCount; i++) {
-      if(activeTheme.value === `theme ${i+1}`) {
-        index = i
-      }
+      const cond1 = activeTheme.value === `theme ${i+1}`
+      const cond2 = activeTheme.value === `theme ${i+1} (gif)`
+      if(cond1 || cond2) index = i
     }
 
-    // switch(activeTheme.value) {
-    //   case `theme ${}`:
-    //     index = 0
-    //     break
-    //   case 'theme 2':
-    //     index = 1
-    //     break
-    //   case 'theme 3':
-    //     index = 2
-    //     break
-    //   case 'theme 4':
-    //     index = 3
-    //     break
-    //   default:
-    //     return 
-    // }
     document.body.style.backgroundImage=`url(${bcgThemePaths[index]})`
   }
   changeAppTheme()
 
-  return { isModalDisplayed, activeTheme, $reset, switchModal, saveModalChanges }
-})
+  return { isModalDisplayed, activeTheme, $reset, switchModal, saveModalChanges, changeAppTheme }
+}) 
