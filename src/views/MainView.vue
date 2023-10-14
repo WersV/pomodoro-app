@@ -12,7 +12,7 @@
           <AppInput v-model="storeTime.pomodoroInputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
           <AppInput v-model="storeTime.shortBreakInputMinutes" id="ShortBreak" label="Short break: " type="number"/>
           <AppInput v-model="storeTime.longBreakInputMinutes" id="LongBreak" label="Long break: " type="number"/>
-          <AppSelect v-model="storeModal.activeTheme" :options="['theme 1', 'theme 2', 'theme 3', 'theme 4']" label="Background: "/>
+          <AppSelect v-model="storeModal.activeTheme" :options="['theme 1', 'theme 2', 'theme 3', 'theme 4', 'theme 5']" label="Background: "/>
         </div>
       </template>
     </AppModal>
