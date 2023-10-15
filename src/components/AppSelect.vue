@@ -4,7 +4,7 @@
   :value="modelValue"
   v-bind="{
     ...$attrs,
-    onChange: ($event) => {$emit('update:modelValue', $event.target.value)}
+    onChange: ($event) => {$emit('update:modelValue', $event.target.value); $emit('changeTheme')}
   }"
   >
     <option 
@@ -29,7 +29,7 @@ defineProps({
     required: true
   }
 })
-defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue', 'changeTheme'])
 </script>
 <style>
   

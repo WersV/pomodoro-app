@@ -34,69 +34,6 @@ onClickOutside(target, () => {
 </script>
 
 <style lang="scss" scoped>
-// .modal-background {
-// 	position: fixed;
-// 	top: 0;
-// 	left: 0;
-// 	width: 100vw;
-// 	height: 100vh;
-// 	background-color: rgba(0,0,0,0.6);
-	
-// 	.modal {
-// 		position: absolute;
-// 		top: 50%;
-// 		left: 50%;
-// 		transform: translate(-50%, -50%);
-// 		width: 270px;
-// 		height: 240px;
-// 		color: white;
-// 		background-color: black;
-// 		border-radius: 15px;
-
-// 		.content-wrapper {
-// 			height: 100%;
-// 			.content-main {
-// 				display: flex;
-// 				justify-content: center;
-// 				align-items: center;
-// 			}
-// 		}
-
-// 		.save-btn {
-// 			position: absolute;
-// 			bottom: 10px;
-// 			right: 10px;
-// 			font-size: 30px;
-// 			color: white;
-// 			border: 0;
-// 			background-color: transparent;
-// 			cursor: pointer;
-// 		}
-
-// 		.close-btn {
-// 			position: absolute;
-// 			top: 10px;
-// 			right: 10px;
-// 			background-color: transparent;
-// 			border: 0;
-// 			color: white;
-// 			font-size: 30px;
-// 			cursor: pointer;
-// 		}
-// 		.reset-default-btn {
-// 			position: absolute;
-// 			bottom: 16px;
-// 			right: 60px;
-// 			background-color: transparent;
-// 			border: 1px solid white;
-// 			border-radius: 10px;
-// 			color: white;
-// 			padding: 5px 10px;
-// 			cursor: pointer;
-// 		}
-// 	}
-// }
-
 .modal-background {
 	position: fixed;
 	top: 0;
@@ -117,9 +54,6 @@ onClickOutside(target, () => {
 		border-radius: 15px;
 
 		.content-wrapper {
-			// display: flex;
-			// justify-content: center;
-			// height: 100%;
 			.content-main {
 				display: flex;
 				justify-content: center;
