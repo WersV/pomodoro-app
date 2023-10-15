@@ -1,12 +1,12 @@
 <template>
   <div class="control-btns">
     <button class="time-btn" :class="{clicked: storeTime.isStartStopBtnStyling}" 
-      @click="storeTime.handleCounter(); toggleClassClicked()" 
+      @click="storeTime.handleCounter(); toggleClassClicked('startStop')" 
       :disabled="storeTime.isStartStopBtnDisabled">
       {{ storeTime.isTimeRunning ? 'Stop' : 'Start' }}
     </button>
     <button class="btns reset" 
-      @click="storeTime.resetCounter(); startAnimation('reset')">
+      @click="storeTime.resetCounter(); startAnimation('reset'); toggleClassClicked('reset')">
       <font-awesome-icon :class="{animated: isResetAnimating}" icon="fa-solid fa-arrow-rotate-right" />
     </button>
     <button class="btns" @click="storeModal.switchModal(); startAnimation('settings')">
@@ -34,8 +34,9 @@ watchEffect(() => {
   }
 })
 
-const toggleClassClicked = () => {
-  storeTime.isStartStopBtnStyling = !storeTime.isStartStopBtnStyling
+const toggleClassClicked = (btnType) => {
+  if(btnType === 'startStop') storeTime.isStartStopBtnStyling = !storeTime.isStartStopBtnStyling
+  if(btnType === 'reset') storeTime.isStartStopBtnStyling = true
 }
 
 const startAnimation = (btnType) => {

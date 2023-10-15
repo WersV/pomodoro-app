@@ -17,6 +17,7 @@
            'theme 8','theme 9 (gif)', 'theme 10 (gif)', 'theme 11 (gif)',
            'theme 12 (gif)', 'theme 13 (gif)']"
           label="Background: "/>
+
         </div>
       </template>
     </AppModal>
@@ -37,10 +38,6 @@ import AppSelect from '@/components/AppSelect.vue'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
-
-function test() {
-  console.log('dziala');
-}
 
 </script>
 
