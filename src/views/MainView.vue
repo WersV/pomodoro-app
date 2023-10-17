@@ -8,7 +8,6 @@
       v-if="storeModal.isModalDisplayed"
     >
       <template #content-main>
-        <div>
           <AppInput v-model="storeTime.pomodoroInputMinutes" id="Pomodoro" label="Pomorodo: " type="number"/>
           <AppInput v-model="storeTime.shortBreakInputMinutes" id="ShortBreak" label="Short break: " type="number"/>
           <AppInput v-model="storeTime.longBreakInputMinutes" id="LongBreak" label="Long break: " type="number"/>
@@ -17,12 +16,10 @@
            'theme 8','theme 9 (gif)', 'theme 10 (gif)', 'theme 11 (gif)',
            'theme 12 (gif)', 'theme 13 (gif)']"
           label="Background: "/>
-
-        </div>
       </template>
     </AppModal>
   </Transition>
-  {{ storeTime.pomodoroInput }}
+  <AppMusicPlayer />
 </div>
 </template>
 
@@ -34,7 +31,8 @@ import AppTimer from '@/components/AppTimer.vue'
 import AppPomodoroControls from '@/components/AppPomodoroControls.vue'
 import {useModalStore} from '@/stores/store.js'
 import {useTimeStore} from '@/stores/time.js'
-import AppSelect from '@/components/AppSelect.vue'
+import AppSelect from '../components/AppSelect.vue'
+import AppMusicPlayer from '@/components/AppMusicPlayer.vue'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()

@@ -5,8 +5,10 @@
 			<font-awesome-icon icon="fa-solid fa-xmark" />
 		</button>
 		<div class="content-wrapper">
-			<main class="content-main">
-				<slot name="content-main"></slot>
+			<main class="content-main-wrapper">
+				<div class="content-main">
+					<slot name="content-main"></slot>
+				</div>
 			</main>
 		</div>
 		<button @click="storeModal.saveModalChanges()" class="save-btn">
@@ -48,13 +50,13 @@ onClickOutside(target, () => {
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 270px;
-		height: 300px;
+		height: 280px;
 		color: white;
 		background-color: black;
 		border-radius: 15px;
 
 		.content-wrapper {
-			.content-main {
+			.content-main-wrapper {
 				display: flex;
 				justify-content: center;
 				align-items: center;
