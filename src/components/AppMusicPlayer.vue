@@ -12,17 +12,17 @@ import _ from 'lodash'
 const width = ref(null)
 width.value = window.innerWidth
 
+function getWidth() {
+   width.value = window.innerWidth
+   console.log('dziala');
+}
+
 onMounted(() => {
   window.addEventListener('resize', _.throttle(getWidth,500))
 })
 onUnmounted(() => {
   window.removeEventListener('resize', getWidth)
 })
-
-function getWidth() {
-   width.value = window.innerWidth
-   console.log('dziala');
-}
 
 </script>
 

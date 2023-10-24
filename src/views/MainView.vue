@@ -24,36 +24,26 @@
 </template>
 
 <script setup>
+import {defineAsyncComponent} from 'vue'
 import AppControls from '@/components/AppControls.vue'
-import AppModal from '@/components/AppModal.vue'
-import AppInput from '@/components/AppInput.vue'
 import AppTimer from '@/components/AppTimer.vue'
 import AppPomodoroControls from '@/components/AppPomodoroControls.vue'
 import {useModalStore} from '@/stores/store.js'
 import {useTimeStore} from '@/stores/time.js'
-import AppSelect from '../components/AppSelect.vue'
 import AppMusicPlayer from '@/components/AppMusicPlayer.vue'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
-// console.log(storeMusic.ACCESS_TOKEN);
-// console.log(storeMusic.playlist.tracks.items[0].track.uri);
-// const audio = new Audio(storeMusic.playlist.tracks.items[0].track.href);
-// audio.volume = 0.2;
-// audio.play();
-function click() {
-  // console.log(storeMusic.ACCESS_TOKEN);
-//   fetch(storeMusic.playlist.tracks.items[0].track.href, {
-//     method: 'PUT',
-//     headers: {
-//       Authorization: `Bearer ${storeMusic.ACCESS_TOKEN}`
-//     }
-//   })
-//   .then()
-//   const audio = new Audio(storeMusic.playlist.tracks.items[0].track.href);
-// audio.volume = 0.2;
-// audio.play();
-}
+
+const AppModal = defineAsyncComponent(
+  () => import('@/components/AppModal.vue')
+)
+const AppInput = defineAsyncComponent(
+  () => import('@/components/AppInput.vue')
+)
+const AppSelect = defineAsyncComponent(
+  () => import('@/components/AppSelect.vue')
+)
 
 </script>
 
