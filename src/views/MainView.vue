@@ -36,6 +36,24 @@ import AppMusicPlayer from '@/components/AppMusicPlayer.vue'
 
 const storeModal = useModalStore()
 const storeTime = useTimeStore()
+// console.log(storeMusic.ACCESS_TOKEN);
+// console.log(storeMusic.playlist.tracks.items[0].track.uri);
+// const audio = new Audio(storeMusic.playlist.tracks.items[0].track.href);
+// audio.volume = 0.2;
+// audio.play();
+function click() {
+  // console.log(storeMusic.ACCESS_TOKEN);
+//   fetch(storeMusic.playlist.tracks.items[0].track.href, {
+//     method: 'PUT',
+//     headers: {
+//       Authorization: `Bearer ${storeMusic.ACCESS_TOKEN}`
+//     }
+//   })
+//   .then()
+//   const audio = new Audio(storeMusic.playlist.tracks.items[0].track.href);
+// audio.volume = 0.2;
+// audio.play();
+}
 
 </script>
 

@@ -1,24 +1,28 @@
 <template>
-  <div class="song-player">
-    <div class="song-details">
-      <h2 class="song-title"><span>Tiger Tales (of the concrete jungle)</span></h2>
-      <span class="song-author">Tiperpalm*Bay asd as as</span>
-    </div>
-    <div class="song-controls">
-      <div class="song-control-btns">
-        <button class="song-previous"> <font-awesome-icon icon="fa-solid fa-backward-step"/></button>
-        <button class="song-start-stop"><font-awesome-icon icon="fa-solid fa-play" /></button> 
-        <!-- <font-awesome-icon icon="fa-solid fa-pause" /> -->
-        <button class="song-next"><font-awesome-icon icon="fa-solid fa-forward-step"/></button>
-      </div>
-      <div class="song-progress-bar"></div>
-      <div class="song-timer"></div>
-      <div class="song-volume"></div>
+  <div v-show="width > 750" class="song-player">
+    <div class="spotify-embeed">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&theme=0" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
   </div>
 </template>
 
 <script setup>
+import {ref, onMounted, onUnmounted} from 'vue'
+import _ from 'lodash'
+const width = ref(null)
+width.value = window.innerWidth
+
+onMounted(() => {
+  window.addEventListener('resize', _.throttle(getWidth,500))
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', getWidth)
+})
+
+function getWidth() {
+   width.value = window.innerWidth
+   console.log('dziala');
+}
 
 </script>
 
@@ -26,53 +30,23 @@
 .song-player {
   box-sizing: border-box;
   position: absolute;
-  bottom: 10%;
-  right: 10%;
-  width: 300px;
-  height: 100px;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 15px;
-  .song-details {
-    display: flex;
-    flex-wrap: wrap;
-    color: white;
-    .song-title {
-      margin: 0;
-      font-size: 16px;
-      // width: 200px;
-      overflow: hidden;
-      white-space: nowrap
-    }
-    .song-author {
-      margin-top: 5px;
-      font-size: 13px;
-      width: 90px;
-      overflow: hidden;
-      white-space: nowrap
-    }
+  bottom: 5%;
+  right: 5%;
+  .spotify-embeed {
+    width: 300px;
+    height: 80px;
   }
-  .song-controls {
-    color: white;
-    .song-control-btns {
-      display: flex;
-      justify-content: center;
-      margin-top: -10px;
-      .song-previous, .song-start-stop, .song-next {
-        background: transparent;
-        border: 0;
-        color: white;
-        font-size: 25px;
-        cursor: pointer;
-      }
-      .song-previous {
-        padding-right: 8px;
-      }
-    }
-    .song-progress-bar {
-      border-bottom: 6px solid;
-      border-radius: 3px;
-      margin-top: 10px;
+}
+
+@media(min-width: 1300px) {
+  .song-player {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    .spotify-embeed {
+      width: 350px;
+      height: 160px;
     }
   }
 }
