@@ -17,7 +17,8 @@ export const useTimeStore = defineStore('time', () => {
   const intervalId = ref(null)
   const isStartStopBtnDisabled = ref(false)
   const isStartStopBtnStyling = ref(true)
-
+  const pomodorosLeftToLongBreak = ref(4) // after 4 pomodoros set long break.
+  const shortBreaksLeftToLongBreak = ref(3) // and after 3 short breaks set long break
 
   const FULL_DASH_ARRAY = 283 // because 2*pi*r = 2*pi*45(my actual radius) = 283
 
@@ -53,7 +54,21 @@ export const useTimeStore = defineStore('time', () => {
           clearInterval(intervalId.value)
           intervalId.value = null
           isStartStopBtnDisabled.value = true
-          alert('Time has passed')
+          if(activeTab.value === 'pomodoro') {
+            pomodorosLeftToLongBreak.value--
+            if(pomodorosLeftToLongBreak.value === 0 && shortBreaksLeftToLongBreak.value === 0) {
+              activeTabSwitch('longBreak')
+              pomodorosLeftToLongBreak.value = 4 // set long break after 4 pomodoros
+              shortBreaksLeftToLongBreak.value = 3 // set long break after 3 short breaks
+            } else {
+              activeTabSwitch('shortBreak')
+            }
+          } else if(activeTab.value === 'shortBreak') {
+            shortBreaksLeftToLongBreak.value--
+            activeTabSwitch('pomodoro')
+          } else if(activeTab.value === 'longBreak') {
+            activeTabSwitch('pomodoro')
+          }
         } else {
           seconds.value -= 1
           isStartStopBtnDisabled.value = false
