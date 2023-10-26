@@ -66,11 +66,12 @@ onClickOutside(target, () => {
 
 		.save-btn {
 			position: absolute;
-			bottom: 10px;
-			right: 10px;
+			bottom: 13px;
+			right: 20px;
 			font-size: 30px;
 			color: white;
 			border: 0;
+			padding: 0;
 			background-color: transparent;
 			cursor: pointer;
 		}
@@ -78,17 +79,18 @@ onClickOutside(target, () => {
 		.close-btn {
 			position: absolute;
 			top: 10px;
-			right: 10px;
+			right: 20px;
 			background-color: transparent;
 			border: 0;
 			color: white;
 			font-size: 30px;
+			padding: 0;
 			cursor: pointer;
 		}
 		.reset-default-btn {
 			position: absolute;
-			bottom: 16px;
-			right: 60px;
+			bottom: 18px;
+			right: 70px;
 			background-color: transparent;
 			border: 1px solid white;
 			border-radius: 10px;
