@@ -58,8 +58,9 @@ const startAnimation = (btnType) => {
 .control-btns {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   margin-top: 10px;
+  width: 320px;
   .time-btn {
     width: 80px;
     background-color: transparent;
@@ -69,7 +70,7 @@ const startAnimation = (btnType) => {
     padding: 10px 20px;
     font-size: 16px;
     font-family: lato;
-    margin: 0 5px;
+    // margin: 0 5px;
     cursor: pointer;
   }
   .time-btn.clicked {
@@ -87,6 +88,7 @@ const startAnimation = (btnType) => {
     align-items: center;
     background-color: transparent;
     border: 0;
+    padding: 0;
     font-size: 30px;
     color: white;
     cursor: pointer;
@@ -105,7 +107,7 @@ const startAnimation = (btnType) => {
   .time-btn {
     width: 100px;
     font-size: 17px;
-    padding: 12px 0; //no left/right padding bcs fixed width
+    padding: 12px 20px; //no left/right padding bcs fixed width
   }
   .btns {
     font-size: 35px;
@@ -120,7 +122,6 @@ const startAnimation = (btnType) => {
 .control-btns {
   .time-btn {
     width: 120px;
-    margin-left: 20px;
     font-size: 20px;
     padding: 12px 35px;
   }
