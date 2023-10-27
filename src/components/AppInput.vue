@@ -37,34 +37,6 @@ defineProps({
 defineEmits(['update:modelValue'])
 </script>
 <style lang="scss" scoped>
-// .input-wrapper {
-//   label {
-//     display: inline-block;
-//     width: 85px;
-//   }
-//   input {
-//     width: 50px;
-//   }
-// }
-// .input-wrapper {
-//   margin: 10px 0;
-//   label {
-//     display: inline-block;
-//     width: 90px;
-//   }
-//   input {
-//     width: 30px;
-//     background-color: transparent;
-//     border: 1px solid white;
-//     border-radius: 5px;
-//     color: white;
-//     padding: 5px;
-//   }
-
-//   .minutes {
-//     padding-left: 5px;
-//   }
-// }
 
 .input-wrapper {
   margin: 10px 0;

@@ -70,7 +70,6 @@ const startAnimation = (btnType) => {
     padding: 10px 20px;
     font-size: 16px;
     font-family: lato;
-    // margin: 0 5px;
     cursor: pointer;
   }
   .time-btn.clicked {

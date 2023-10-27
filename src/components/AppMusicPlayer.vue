@@ -55,9 +55,7 @@ onUnmounted(() => {
 
 @media(max-height: 680px) {
   .song-player {
-    // margin-top: 20px;
     bottom: -10%;
-    // margin-bottom: 20px;
   }
 }
 
