@@ -2,6 +2,19 @@ import { defineStore } from 'pinia'
 import {ref} from 'vue'
 import {useTimeStore} from '@/stores/time.js'
 import { useStorage } from '@vueuse/core'
+import bcg1 from '../assets/img/bcg1.jpg'
+import bcg2 from '../assets/img/bcg2.jpg'
+import bcg3 from '../assets/img/bcg3.jpg'
+import bcg4 from '../assets/img/bcg4.jpg'
+import bcg5 from '../assets/img/bcg5.jpg'
+import bcg6 from '../assets/img/bcg6.jpg'
+import bcg7 from '../assets/img/bcg7.jpg'
+import bcg8 from '../assets/img/bcg8.jpg'
+import gif1 from '../assets/gif/gif1.gif'
+import gif2 from '../assets/gif/gif2.webp'
+import gif3 from '../assets/gif/gif3.gif'
+import gif4 from '../assets/gif/gif4.gif'
+import gif5 from '../assets/gif/gif5.gif'
 
 export const useModalStore = defineStore('modal', () => {
 
@@ -12,19 +25,8 @@ export const useModalStore = defineStore('modal', () => {
   const isModalDisplayed = ref(false)
 
   const bcgThemePaths = [
-   'src/assets/img/bcg1.jpg',
-   'src/assets/img/bcg2.jpg',
-   'src/assets/img/bcg3.jpg',
-   'src/assets/img/bcg4.jpg',
-   'src/assets/img/bcg5.jpg',
-   'src/assets/img/bcg6.jpg',
-   'src/assets/img/bcg7.jpg',
-   'src/assets/img/bcg8.jpg',
-   'src/assets/gif/gif1.gif',
-   'src/assets/gif/gif2.webp',
-   'src/assets/gif/gif3.gif',
-   'src/assets/gif/gif4.gif',
-   'src/assets/gif/gif5.gif',]
+    bcg1, bcg2, bcg3, bcg4, bcg5, bcg6, bcg7, bcg8, gif1, gif2, gif3, gif4, gif5
+  ]
 
   function $reset() {
     activeTheme.value = 'theme 1'
