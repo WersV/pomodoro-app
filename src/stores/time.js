@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import {ref, onMounted} from 'vue'
 import { useStorage } from '@vueuse/core'
+import sound from '@/assets/sounds/finish-bell.wav'
 
 export const useTimeStore = defineStore('time', () => {
   const pomodoroInputMinutes = useStorage('pomodoroInputMinutes', 25)
@@ -23,8 +24,7 @@ export const useTimeStore = defineStore('time', () => {
   const FULL_DASH_ARRAY = 283 // because 2*pi*r = 2*pi*45(my actual radius) = 283
 
   const finishSound = new Audio()
-  // finishSound.autoplay = true
-  finishSound.src = 'src/assets/sounds/finish-bell.wav'
+  finishSound.src = sound
 
   function $reset() {
     pomodoroInputMinutes.value = 25
