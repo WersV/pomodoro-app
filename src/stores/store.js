@@ -61,6 +61,7 @@ export const useModalStore = defineStore('modal', () => {
       if(cond1 || cond2) index = i
     }
     document.body.style.backgroundImage=`url(${bcgThemePaths[index]})`
+    document.body.style.backgroundRepeat= 'no-repeat'
   }
 
   // async function changeSong() {

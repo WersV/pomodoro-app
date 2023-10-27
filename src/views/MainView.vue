@@ -57,6 +57,12 @@ const AppSelect = defineAsyncComponent(
   flex-direction: column;
 }
 
+@media(max-height: 680px) {
+  .main-container {
+    height: 110vh;
+  }
+}
+
 .v-enter-active, .v-leave-active {
 		transition: all 0.3s ease-out;
 	}
