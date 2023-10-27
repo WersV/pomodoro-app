@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import { useStorage } from '@vueuse/core'
 
 export const useTimeStore = defineStore('time', () => {
@@ -21,6 +21,10 @@ export const useTimeStore = defineStore('time', () => {
   const shortBreaksLeftToLongBreak = ref(3) // and after 3 short breaks set long break
 
   const FULL_DASH_ARRAY = 283 // because 2*pi*r = 2*pi*45(my actual radius) = 283
+
+  const finishSound = new Audio()
+  // finishSound.autoplay = true
+  finishSound.src = 'src/assets/sounds/finish-bell.wav'
 
   function $reset() {
     pomodoroInputMinutes.value = 25
@@ -54,6 +58,7 @@ export const useTimeStore = defineStore('time', () => {
           clearInterval(intervalId.value)
           intervalId.value = null
           isStartStopBtnDisabled.value = true
+          finishSound.play()
           if(activeTab.value === 'pomodoro') {
             pomodorosLeftToLongBreak.value--
             if(pomodorosLeftToLongBreak.value === 0 && shortBreaksLeftToLongBreak.value === 0) {
@@ -145,6 +150,12 @@ export const useTimeStore = defineStore('time', () => {
     const circleDasharray = (calculateTimeFraction() * FULL_DASH_ARRAY) + ' 283'
     return circleDasharray
   }
+
+  onMounted(() => {
+    window.addEventListener('touchstart', () => {
+      finishSound.load() // I don't want to play the sound onMounted. I just have to do sth with audio element bcs .play() won't fire automatically on ios when time runs out without previous user interaction
+    }, {once: true})
+  })
 
   return { 
     pomodoroInputMinutes,
