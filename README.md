@@ -1,35 +1,23 @@
-# pomodoro-app
+# Pomodoro-app
 
-This template should help get you started developing with Vue 3 in Vite.
+## Overview
 
-## Recommended IDE Setup
+This Pomodoro web app offers a range of features aimed at optimizing productivity sessions. With a web player interface, it enables seamless transitions between work and break cycles. Additionally, the app allows for on-the-fly theme changes without the need for page reloading and provides customizable time settings for tailored work intervals, making it adaptable to individual preferences and workflows.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Screenshot
 
-## Customize configuration
+![](./screenshots/main-desktop.JPG)
+![](./screenshots/main-mobile.JPG)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## How to use?
 
-## Project Setup
+The easiest way to use the Pomodoro app is to simply open the dedicated website (link below). Alternatively, you can fork this repository and perform an 'npm install'.
 
-```sh
-npm install
-```
+## Links
 
-### Compile and Hot-Reload for Development
+- GitHub repository: [https://github.com/WersV/pomodoro-app](https://github.com/WersV/pomodoro-app)
+- GitHub Pages: [https://wersv.github.io/pomodoro-app/](https://wersv.github.io/pomodoro-app/)
 
-```sh
-npm run dev
-```
+## Author
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- My GitHub profile - [Przemysław Botwina](https://github.com/WersV)
